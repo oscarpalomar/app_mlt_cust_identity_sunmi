@@ -60,7 +60,7 @@ public class SunmiPrinterPlugin: FlutterPlugin, MethodCallHandler, StreamHandler
       "isSunmiDevice" -> result.success(CommonFunctions.IsSunmiDevice())
       "doRawPrint" -> {
         if (call.hasArgument("data")) {
-          result.success(SunmiPrinter().rawPrint(context, call.argument<ByteArray>("data")!!, object: SunmiPrinter.InternalPrinterCallback {
+          SunmiPrinter().rawPrint(context, call.argument<ByteArray>("data")!!, object: SunmiPrinter.InternalPrinterCallback {
             override fun result(success: Boolean) {
               eventSink?.success(success)
             }
