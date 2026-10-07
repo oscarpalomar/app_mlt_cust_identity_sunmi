@@ -43,14 +43,13 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
 
   @override
   Future<bool?> doRawPrint(Uint8List data) async {
-    try {
-      final bool? result = await methodChannel.invokeMethod('doRawPrint', data);
-      return result;
-    } on PlatformException catch (_) {
-      return false;
-    } on MissingPluginException catch (_) {
-      return false;
-    }
+    var completer = Completer<bool?>();
+    eventChannel.receiveBroadcastStream().listen((event) {
+      //print("Event: $event");
+      completer.complete(event == true);
+    });
+    methodChannel.invokeMethod('doRawPrint', data);
+    return completer.future;
   }
 
   @override
@@ -58,16 +57,9 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
     var completer = Completer<bool?>();
     eventChannel.receiveBroadcastStream().listen((event) {
       //print("Event: $event");
-      completer.complete(event);
+      completer.complete(event == true);
     });
-    try {
-      final bool? result = await methodChannel.invokeMethod('doBase64Print', data);
-      return result;
-    } on PlatformException catch (_) {
-      return false;
-    } on MissingPluginException catch (_) {
-      return false;
-    }
+    methodChannel.invokeMethod('doBase64Print', data);
     return completer.future;
   }
 }
