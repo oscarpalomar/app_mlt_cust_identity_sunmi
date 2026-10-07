@@ -1,3 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.neogrup.app_mlt_cust_identity_sunmi">
+
+  <queries>
+  	<package android:name="woyou.aidlservice.jiuiv5" />
+  </queries>
+
 </manifest>
