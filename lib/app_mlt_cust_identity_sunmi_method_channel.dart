@@ -31,7 +31,7 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
   }
 
   @override
-  Future<String?> getStatus(String printerDriver, bool byPass) async {
+  Future<String?> getPrintStatus() async {
     var completer = Completer<String?>();
     eventChannel.receiveBroadcastStream().listen((event) {
       //print("Event: $event");

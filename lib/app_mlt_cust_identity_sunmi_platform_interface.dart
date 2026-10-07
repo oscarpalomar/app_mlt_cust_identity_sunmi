@@ -31,7 +31,7 @@ abstract class FlutterDevicesSunmiPlatform extends PlatformInterface {
     throw UnimplementedError('isSunmiDevice() has not been implemented.');
   }
 
-  Future<String?> getStatus(String printerDriver, bool byPass) {
+  Future<String?> getPrintStatus() {
     throw UnimplementedError('getStatus() has not been implemented.');
   }
 }
