@@ -64,13 +64,14 @@ kotlin {
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("androidx.annotation:annotation:1.11.0")
     compileOnly("io.flutter:flutter_embedding_debug:1.0.0-e85ea0e79c6d126c19f29518823d666d92bbae40")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.mockito:mockito-core:5.0.0")
     api("com.sunmi:printerlibrary:1.0.24")
     implementation(kotlin("stdlib-jdk8"))
-    implementation(files("/Users/oscar/DEVELOPMENT/APPLICATIONS/flutter/bin/cache/artifacts/engine/android-x64-release/flutter.jar"))
+    // implementation(files("/Users/oscar/DEVELOPMENT/APPLICATIONS/flutter/bin/cache/artifacts/engine/android-x64-release/flutter.jar"))
 }
 repositories {
     mavenCentral()
