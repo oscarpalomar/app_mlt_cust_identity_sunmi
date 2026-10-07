@@ -55,7 +55,7 @@ class SunmiPrinter {
     private var mData: ByteArray? = null
 
     fun rawPrint(context: Context, data: ByteArray) {
-        getPrinterStatus(context, object : iInternalPrinterStatusCallback {
+        getPrinterStatusInternal(context, object : iInternalPrinterStatusCallback {
             override fun readedStatus(status: InternalPrinterStatusEnum?) {
                 when (status) {
                     InternalPrinterStatusEnum.Normal -> {
@@ -121,9 +121,7 @@ class SunmiPrinter {
                 callback?.readedStatus(getValueFromPrinterStatus(status).toString())
             }
         })
-
         return true
-
     }
 
     private fun getPrinterStatusInternal(context: Context, callback: iInternalPrinterStatusCallback?) : Boolean{
