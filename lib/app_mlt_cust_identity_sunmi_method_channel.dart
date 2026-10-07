@@ -55,6 +55,11 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
 
   @override
   Future<bool?> doBase64Print(Uint8List data) async {
+    var completer = Completer<bool?>();
+    eventChannel.receiveBroadcastStream().listen((event) {
+      //print("Event: $event");
+      completer.complete(event);
+    });
     try {
       final bool? result = await methodChannel.invokeMethod('doBase64Print', data);
       return result;
@@ -63,5 +68,6 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
     } on MissingPluginException catch (_) {
       return false;
     }
+    return completer.future;
   }
 }

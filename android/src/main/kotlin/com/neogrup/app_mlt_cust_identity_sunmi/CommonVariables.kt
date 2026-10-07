@@ -13,6 +13,5 @@ object CommonVariables {
 
     val CHANNEL : String = "flutter_devices_sunmi"
     var EVENT: String = "flutter_devices_sunmi_event"
-    var print_response_channel : BasicMessageChannel<String>? = null
 
 }

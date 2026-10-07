@@ -20,6 +20,12 @@ class SunmiPrinter {
     // Functions for printing on Sunmi printers
     //
 
+    interface InternalPrinterCallback {
+        fun result(status: Boolean)
+    }
+
+    private var mCallback: InternalPrinterCallback? = null
+
     private val innerPrinterCallback: InnerPrinterCallback = object : InnerPrinterCallback() {
         public override fun onDisconnected() {
             sunmiPrinterService = null
@@ -29,7 +35,7 @@ class SunmiPrinter {
             sunmiPrinterService = service
             if (mData != null) {
                 sunmiPrinterService!!.sendRAWData(mData, null)
-                CommonVariables.print_response_channel?.send("0")
+                mCallback?.result(true)
             }
             unbindPrinter()
         }
@@ -54,7 +60,8 @@ class SunmiPrinter {
 
     private var mData: ByteArray? = null
 
-    fun rawPrint(context: Context, data: ByteArray) {
+    fun rawPrint(context: Context, data: ByteArray, callback: InternalPrinterCallback?) {
+        mCallback = callback
         getPrinterStatusInternal(context, object : iInternalPrinterStatusCallback {
             override fun readedStatus(status: InternalPrinterStatusEnum?) {
                 when (status) {
@@ -63,14 +70,15 @@ class SunmiPrinter {
                         init(context)
                     }
                     else -> {
-                        CommonVariables.print_response_channel?.send(getValueFromPrinterStatus(status).toString())
+                        callback?.result(false)
                     }
                 }
             }
         })
     }
 
-    fun base64Print(context: Context, data: ByteArray) {
+    fun base64Print(context: Context, data: ByteArray, callback: InternalPrinterCallback?) {
+        mCallback = callback
         getPrinterStatusInternal(context, object : iInternalPrinterStatusCallback {
             override fun readedStatus(status: InternalPrinterStatusEnum?) {
                 when (status) {
@@ -79,7 +87,7 @@ class SunmiPrinter {
                         init(context)
                     }
                     else -> {
-                        CommonVariables.print_response_channel?.send(getValueFromPrinterStatus(status).toString())
+                        callback?.result(false)
                     }
                 }
             }

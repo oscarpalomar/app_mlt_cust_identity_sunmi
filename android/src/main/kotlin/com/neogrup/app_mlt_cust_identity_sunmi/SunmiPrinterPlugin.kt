@@ -60,17 +60,24 @@ public class SunmiPrinterPlugin: FlutterPlugin, MethodCallHandler, StreamHandler
       "isSunmiDevice" -> result.success(CommonFunctions.IsSunmiDevice())
       "doRawPrint" -> {
         if (call.hasArgument("data")) {
-          result.success(SunmiPrinter().rawPrint(context, call.argument<ByteArray>("data")!!))
+          result.success(SunmiPrinter().rawPrint(context, call.argument<ByteArray>("data")!!, object: SunmiPrinter.InternalPrinterCallback {
+            override fun result(success: Boolean) {
+              eventSink?.success(success)
+            }
+          })
         } else {
-          result.success(false)
+          eventSink?.success(false)
         }
       }
       "doBase64Print" -> {
         if (call.hasArgument("data")) {
-          SunmiPrinter().base64Print(context, call.argument<ByteArray>("data")!!)
-          result.success(true)
+          SunmiPrinter().base64Print(context, call.argument<ByteArray>("data")!!, object: SunmiPrinter.InternalPrinterCallback {
+            override fun result(success: Boolean) {
+              eventSink?.success(success)
+            }
+          })
         } else {
-          result.success(false)
+          eventSink?.success(false)
         }
       }
       "getPrintStatus" -> {
