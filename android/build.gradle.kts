@@ -1,28 +1,16 @@
-group = "com.neopalomar.app_mlt_cust_identity_sunmi"
-version = "1.0-SNAPSHOT"
-
-buildscript {
-    val kotlinVersion = "2.4.0"
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath("com.android.tools.build:gradle:9.1.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-    }
+plugins {
+    id("com.android.library") // version "8.13.2"
+    id("org.jetbrains.kotlin.android") version "2.3.20"
 }
+
+group = "com.neogrup.app_mlt_cust_identity_sunmi"
+version = "1.0-SNAPSHOT"
 
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
-}
-
-plugins {
-    id("com.android.library")
 }
 
 android {
