@@ -109,17 +109,16 @@ class SunmiPrinter {
         fun readedStatus(status: InternalPrinterStatusEnum?)
     }
 
+    interface InternalPrinterStatusCallback {
+        fun readedStatus(status: String?)
+    }
+
     var mStatusCallback: iInternalPrinterStatusCallback? = null
 
-    fun getPrinterStatus (context: Context) : Boolean {
-        getPrinterStatus(context, object : iInternalPrinterStatusCallback {
+    fun getPrinterStatus (context: Context, callback: InternalPrinterStatusCallback?) : Boolean {
+        getPrinterStatusInternal(context, object : iInternalPrinterStatusCallback {
             override fun readedStatus(status: InternalPrinterStatusEnum?) {
-                CommonVariables.status_response_channel?.send(getValueFromPrinterStatus(status).toString())
-                /*
-                val message = ByteBuffer.allocateDirect(8)
-                message.putDouble(getValueFromPrinterStatus(status))
-                CommonVariables.binaryMessenger?.send("sunmi.status.callback", message)
-                */
+                callback?.readedStatus(getValueFromPrinterStatus(status).toString())
             }
         })
 
@@ -127,7 +126,7 @@ class SunmiPrinter {
 
     }
 
-    private fun getPrinterStatus(context: Context, callback: iInternalPrinterStatusCallback?) : Boolean{
+    private fun getPrinterStatusInternal(context: Context, callback: iInternalPrinterStatusCallback?) : Boolean{
         mStatusCallback = callback
         initStatus(context)
         return true

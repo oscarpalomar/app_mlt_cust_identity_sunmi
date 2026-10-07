@@ -51,6 +51,8 @@ public class SunmiPrinterPlugin: FlutterPlugin, MethodCallHandler, StreamHandler
     CommonVariables.context = flutterPluginBinding.applicationContext
     methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, CommonVariables.CHANNEL)
     methodChannel.setMethodCallHandler(this)
+    eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, "flutter_devices_sunmi_event")
+    eventChannel.setStreamHandler(this)
     CommonVariables.binaryMessenger = flutterPluginBinding.binaryMessenger
   }
 
@@ -76,6 +78,13 @@ public class SunmiPrinterPlugin: FlutterPlugin, MethodCallHandler, StreamHandler
             //result.error("NO_COMPATIBLE", "Device isn't compatible with Sunmi print API", null)
           } else {
             if (call.method == "getPrintStatus") {
+
+              SunmiPrinter().getPrinterStatus(context, object: SunmiPrinter.iInternalPrinterStatusCallback {
+                override fun readedStatus(status: InternalPrinterStatusEnum) {
+                  eventSink?.success(status)
+                }
+              })
+
               SunmiPrinter().getPrinterStatus(context!!)
               result.success(true)
             } else {

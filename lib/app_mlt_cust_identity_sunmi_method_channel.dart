@@ -37,7 +37,7 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
       //print("Event: $event");
       completer.complete(event);
     });
-    methodChannel.invokeMethod<String?>('getStatus', {"driver": printerDriver});
+    methodChannel.invokeMethod<String?>('getPrintStatus');
     return completer.future;
   }
 }
