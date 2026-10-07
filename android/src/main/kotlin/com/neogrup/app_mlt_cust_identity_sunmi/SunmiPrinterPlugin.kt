@@ -76,7 +76,7 @@ public class SunmiPrinterPlugin: FlutterPlugin, MethodCallHandler, StreamHandler
             //result.error("NO_COMPATIBLE", "Device isn't compatible with Sunmi print API", null)
           } else {
             if (call.method == "getPrintStatus") {
-              result.success( SunmiPrinter().getPrinterStatus(context!!))
+              result.success( SunmiPrinter().getPrinterStatus(activity!!))
             } else {
               result.notImplemented()
             }
