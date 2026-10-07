@@ -48,7 +48,7 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
       //print("Event: $event");
       completer.complete(event == true);
     });
-    methodChannel.invokeMethod('doRawPrint', data);
+    methodChannel.invokeMethod('doRawPrint', {'data': data});
     return completer.future;
   }
 
@@ -59,7 +59,7 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
       //print("Event: $event");
       completer.complete(event == true);
     });
-    methodChannel.invokeMethod('doBase64Print', data);
+    methodChannel.invokeMethod('doBase64Print', {'data': data});
     return completer.future;
   }
 }
