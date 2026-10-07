@@ -130,23 +130,6 @@ class SunmiPrinter {
         return true
     }
 
-    private fun initStatus(context: Context?) {
-        this.context = context
-        try {
-            InnerPrinterManager.getInstance().bindService(context, innerPrinterCallbackGetStatus)
-        } catch (e: InnerPrinterException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun unbindPrinterStatus() {
-        try {
-            InnerPrinterManager.getInstance().unBindService(context, innerPrinterCallbackGetStatus)
-        } catch (e: InnerPrinterException) {
-            e.printStackTrace()
-        }
-    }
-
     private val innerPrinterCallbackGetStatus: InnerPrinterCallback = object : InnerPrinterCallback() {
         override fun onConnected(sunmiPrinterService: SunmiPrinterService) {
             sunmiPrinterServiceGetStatus = sunmiPrinterService
@@ -174,6 +157,24 @@ class SunmiPrinter {
             sunmiPrinterServiceGetStatus = null
         }
     }
+
+    private fun initStatus(context: Context?) {
+        this.context = context
+        try {
+            InnerPrinterManager.getInstance().bindService(context, innerPrinterCallbackGetStatus)
+        } catch (e: InnerPrinterException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun unbindPrinterStatus() {
+        try {
+            InnerPrinterManager.getInstance().unBindService(context, innerPrinterCallbackGetStatus)
+        } catch (e: InnerPrinterException) {
+            e.printStackTrace()
+        }
+    }
+
 
 
 
