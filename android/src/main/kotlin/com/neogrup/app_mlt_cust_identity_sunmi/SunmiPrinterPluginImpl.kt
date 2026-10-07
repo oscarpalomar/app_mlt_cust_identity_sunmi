@@ -71,7 +71,7 @@ class SunmiPrinter {
     }
 
     fun base64Print(context: Context, data: ByteArray) {
-        getPrinterStatus(context, object : iInternalPrinterStatusCallback {
+        getPrinterStatusInternal(context, object : iInternalPrinterStatusCallback {
             override fun readedStatus(status: InternalPrinterStatusEnum?) {
                 when (status) {
                     InternalPrinterStatusEnum.Normal -> {
