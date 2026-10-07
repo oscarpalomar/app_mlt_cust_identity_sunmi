@@ -1,0 +1,70 @@
+group 'com.neogrup.app_mlt_cust_identity_sunmi'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '2.3.20'
+    ext.agp_version = '8.6.1'
+    repositories {
+        //jcenter()
+        google()
+        mavenLocal()
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://jcenter.bintray.com/' }
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$agp_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        //jcenter()
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://jcenter.bintray.com/' }
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+android {
+    namespace 'com.neogrup.app_mlt_cust_identity_sunmi'
+
+    compileSdkVersion 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        compilerOptions {
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 30
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.annotation:annotation:1.5.0"
+    implementation 'com.google.code.gson:gson:2.13.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
+    api 'com.sunmi:printerlibrary:1.0.24'
+    //implementation 'com.sunmi:printerx:1.0.20'
+    //implementation files('/Users/oscar/DEVELOPMENT/APPLICATIONS/flutter/bin/cache/artifacts/engine/android-x64-release/flutter.jar')
+}
