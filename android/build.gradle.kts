@@ -23,11 +23,10 @@ allprojects {
 
 plugins {
     id("com.android.library")
-    kotlin("jvm")
 }
 
 android {
-    namespace = "com.neopalomar.app_mlt_cust_identity_sunmi"
+    namespace = "com.neogrup.app_mlt_cust_identity_sunmi"
 
     compileSdk = 36
 
