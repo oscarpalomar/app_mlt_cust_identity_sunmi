@@ -65,6 +65,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.13.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
     api 'com.sunmi:printerlibrary:1.0.24'
-    //implementation 'com.sunmi:printerx:1.0.20'
+    implementation 'com.sunmi:printerx:1.0.20'
     //implementation files('/Users/oscar/DEVELOPMENT/APPLICATIONS/flutter/bin/cache/artifacts/engine/android-x64-release/flutter.jar')
 }

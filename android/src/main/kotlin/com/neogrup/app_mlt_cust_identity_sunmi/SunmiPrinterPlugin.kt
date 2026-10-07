@@ -48,7 +48,6 @@ public class SunmiPrinterPlugin: FlutterPlugin, MethodCallHandler, StreamHandler
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     context = flutterPluginBinding.applicationContext
-    CommonVariables.context = flutterPluginBinding.applicationContext
     methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, CommonVariables.CHANNEL)
     methodChannel.setMethodCallHandler(this)
     eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, CommonVariables.EVENT)
@@ -56,38 +55,32 @@ public class SunmiPrinterPlugin: FlutterPlugin, MethodCallHandler, StreamHandler
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "getPlatformVersion") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
-      if (call.method == "isSunmiDevice") {
-        result.success(CommonFunctions.IsSunmiDevice())
-      } else {
-        if (call.method == "doRawPrint") {
-          if (call.hasArgument("data")) {
-            result.success(SunmiPrinter().rawPrint(context!!, call.argument<ByteArray>("data")!!))
-          } else
-            result.success(false)
+    when (call.method) {
+      "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
+      "isSunmiDevice" -> result.success(CommonFunctions.IsSunmiDevice())
+      "doRawPrint" -> {
+        if (call.hasArgument("data")) {
+          result.success(SunmiPrinter().rawPrint(context, call.argument<ByteArray>("data")!!))
         } else {
-          if (call.method == "doBase64Print") {
-            if (call.hasArgument("data")) {
-              SunmiPrinter().base64Print(context!!, call.argument<ByteArray>("data")!!)
-              result.success(true)
-            } else
-              result.success(false)
-            //result.error("NO_COMPATIBLE", "Device isn't compatible with Sunmi print API", null)
-          } else {
-            if (call.method == "getPrintStatus") {
-              SunmiPrinter().getPrinterStatus(context, object: SunmiPrinter.InternalPrinterStatusCallback {
-                override fun readedStatus(status: String?) {
-                  eventSink?.success(status)
-                }
-              })
-            } else {
-              result.notImplemented()
-            }
-          }
+          result.success(false)
         }
       }
+      "doBase64Print" -> {
+        if (call.hasArgument("data")) {
+          SunmiPrinter().base64Print(context, call.argument<ByteArray>("data")!!)
+          result.success(true)
+        } else {
+          result.success(false)
+        }
+      }
+      "getPrintStatus" -> {
+        SunmiPrinter().getPrinterStatus(context, object: SunmiPrinter.InternalPrinterStatusCallback {
+          override fun readedStatus(status: String?) {
+            eventSink?.success(status)
+          }
+        })
+      }
+      else -> result.notImplemented()
     }
   }
 
