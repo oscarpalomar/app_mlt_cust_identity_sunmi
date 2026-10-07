@@ -7,7 +7,7 @@ import androidx.annotation.NonNull
 import android.util.Log
 import com.neogrup.app_mlt_cust_identity_sunmi.CommonFunctions
 import com.neogrup.app_mlt_cust_identity_sunmi.CommonVariables
-import com.neogrup.hardware.sunmi.SunmiPrinter
+import com.neogrup.app_mlt_cust_identity_sunmi.SunmiPrinter
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
