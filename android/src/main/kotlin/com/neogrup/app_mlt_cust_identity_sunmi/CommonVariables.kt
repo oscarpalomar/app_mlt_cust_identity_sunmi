@@ -1,12 +1,14 @@
 package com.neogrup.app_mlt_cust_identity_sunmi
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import io.flutter.plugin.common.BasicMessageChannel
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.StringCodec
 
+@SuppressLint("StaticFieldLeak")
 object CommonVariables {
 
     var context: Context? = null
