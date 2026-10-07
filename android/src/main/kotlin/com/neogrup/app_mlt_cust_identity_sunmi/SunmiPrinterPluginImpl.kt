@@ -3,7 +3,7 @@ package com.neogrup.app_mlt_cust_identity_sunmi
 import android.content.Context
 import android.os.RemoteException
 import android.util.Base64
-import com.neogrup.app_mlt_cust_identity.CommonVariables
+import com.neogrup.app_mlt_cust_identity_sunmi.CommonVariables
 import com.sunmi.peripheral.printer.InnerPrinterCallback
 import com.sunmi.peripheral.printer.InnerPrinterException
 import com.sunmi.peripheral.printer.InnerPrinterManager
