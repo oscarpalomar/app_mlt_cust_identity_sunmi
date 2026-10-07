@@ -40,4 +40,28 @@ class MethodChannelFlutterDevicesSunmi extends FlutterDevicesSunmiPlatform {
     methodChannel.invokeMethod<String?>('getPrintStatus');
     return completer.future;
   }
+
+  @override
+  Future<bool?> doRawPrint(Uint8List data) async {
+    try {
+      final bool? result = await methodChannel.invokeMethod('doRawPrint', data);
+      return result;
+    } on PlatformException catch (_) {
+      return false;
+    } on MissingPluginException catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool?> doBase64Print(Uint8List data) async {
+    try {
+      final bool? result = await methodChannel.invokeMethod('doBase64Print', data);
+      return result;
+    } on PlatformException catch (_) {
+      return false;
+    } on MissingPluginException catch (_) {
+      return false;
+    }
+  }
 }

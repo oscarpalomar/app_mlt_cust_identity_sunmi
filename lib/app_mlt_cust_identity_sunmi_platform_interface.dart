@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'app_mlt_cust_identity_sunmi_method_channel.dart';
@@ -33,5 +35,13 @@ abstract class FlutterDevicesSunmiPlatform extends PlatformInterface {
 
   Future<String?> getPrintStatus() {
     throw UnimplementedError('getStatus() has not been implemented.');
+  }
+
+  Future<bool?> doRawPrint(Uint8List data) {
+    throw UnimplementedError('doRawPrint() has not been implemented.');
+  }
+
+  Future<bool?> doBase64Print(Uint8List data) {
+    throw UnimplementedError('doBase64Print() has not been implemented.');
   }
 }

@@ -51,9 +51,8 @@ public class SunmiPrinterPlugin: FlutterPlugin, MethodCallHandler, StreamHandler
     CommonVariables.context = flutterPluginBinding.applicationContext
     methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, CommonVariables.CHANNEL)
     methodChannel.setMethodCallHandler(this)
-    eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, "flutter_devices_sunmi_event")
+    eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, CommonVariables.EVENT)
     eventChannel.setStreamHandler(this)
-    CommonVariables.binaryMessenger = flutterPluginBinding.binaryMessenger
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
