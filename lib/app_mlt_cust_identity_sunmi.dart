@@ -5,6 +5,10 @@ class AppMltCustIdentitySunmi {
     return FlutterDevicesSunmiPlatform.instance.getPlatformVersion();
   }
 
+  Future<bool?> isSunmiDevice() {
+    return FlutterDevicesSunmiPlatform.instance.isSunmiDevice();
+  }
+
   Future<String?> getStatus(String printerDriver, bool byPass) {
     return FlutterDevicesSunmiPlatform.instance.getStatus(printerDriver, byPass);
   }
